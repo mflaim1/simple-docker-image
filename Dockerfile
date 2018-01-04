@@ -1,3 +1,5 @@
 FROM ubuntu:latest
 
-CMD ["/bin/echo","hello world"]
+RUN /bin/bash -c 'HELLO'
+ENV myEnvVar="Env Var 1" \
+    otherEnvVar="Env Var 2"
