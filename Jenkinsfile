@@ -1,14 +1,9 @@
-pipeline {
-  agent { dockerfile true }
-  stages {
-    stage('Example'){
-        steps{
-            echo 'IN STEP'
-            sh 'echo myEnvVar = $myEnvVar'
-            sh 'echo otherEnvVar = $otherEnvVar'
-
-        }
-    }
+node {
+  checkout scm
+  def myenv = docker.build 'helloworld:latest'
+  myenv.inside{
+    sh 'echo myEnvVar = $myEnvVar'
+    sh 'echo otherEnvVar = $otherEnvVar'
   }
 
 }
