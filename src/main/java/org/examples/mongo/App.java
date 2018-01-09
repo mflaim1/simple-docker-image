@@ -44,7 +44,7 @@ public class App {
             ds.getMongo()
               .getDatabase(App.DATABASE)
               .getCollection(App.COLLECTION).insertOne(document);
-            System.out.println("Appended to mongo database")
+            System.out.println("Appended to mongo database");
 
         } finally {
             ds.getMongo().close();
