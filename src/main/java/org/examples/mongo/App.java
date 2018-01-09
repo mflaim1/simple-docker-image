@@ -8,14 +8,14 @@ import org.mongodb.morphia.Morphia;
 /**
  *
  * Simple Mongo example. Saves a text to MongoDB.
- * 
+ *
  * @author fabianenardon
  */
 public class App {
-    
+
     public static final String DATABASE = "testdb";
     public static final String COLLECTION = "hello";
-    
+
     public App() {
     }
 
@@ -32,24 +32,25 @@ public class App {
         }
 
         String mongoHost = args[0];
-        
+
         MongoClient mongo = new MongoClient(mongoHost);
         Morphia morphia = new Morphia();
         Datastore ds = morphia.createDatastore(mongo, App.DATABASE);
         try {
-            
+
             Document document = new Document();
             document.append("text", "Hello World");
-            
+
             ds.getMongo()
               .getDatabase(App.DATABASE)
               .getCollection(App.COLLECTION).insertOne(document);
+            System.out.println("Appended to mongo database")
 
         } finally {
             ds.getMongo().close();
-        } 
+        }
 
-        
+
     }
 
 }
