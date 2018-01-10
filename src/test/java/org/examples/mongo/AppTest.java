@@ -1,4 +1,4 @@
-package org.examples.hadoop;
+package org.examples.mongo;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

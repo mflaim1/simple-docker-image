@@ -5,6 +5,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCursor;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+
 import org.bson.Document;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,16 +31,17 @@ public class AppIT {
     
     @Test
     public void testSave() throws Exception {
-        MongoClient mongo = new MongoClient(DOCKER_MONGO_HOST, DOCKER_MONGO_PORT);
+        MongoClient mongo = new MongoClient("localhost", DOCKER_MONGO_PORT);
         Morphia morphia = new Morphia();
         Datastore ds = morphia.createDatastore(mongo, App.DATABASE);
         try {
             
             MongoCursor<Document> result = ds.getMongo()
                                          .getDatabase(App.DATABASE)
-                                         .getCollection(App.COLLECTION).find().limit(1).iterator();
+                                         .getCollection(App.COLLECTION).find().limit(3).iterator();
             assertTrue(result.hasNext());
             assertEquals("Hello World", result.next().get("text"));
+            assertFalse(result.hasNext());
             System.out.println("ALL TESTS PASSED.");
         } finally {
             ds.getMongo().close();

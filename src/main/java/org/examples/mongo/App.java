@@ -1,6 +1,8 @@
 package org.examples.mongo;
 
 import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCursor;
+
 import org.bson.Document;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -26,7 +28,7 @@ public class App {
      *
      */
     public static void main(String[] args) throws Exception {
-        if (args == null || args.length == 0) {
+       if (args == null || args.length == 0) {
             System.err.println("MongoDB server not informed.");
             System.exit(1);
         }
@@ -40,11 +42,14 @@ public class App {
 
             Document document = new Document();
             document.append("text", "Hello World");
-
+           
             ds.getMongo()
+            .getDatabase(App.DATABASE)
+            .getCollection(App.COLLECTION).deleteMany(new Document());
+            
+           ds.getMongo()
               .getDatabase(App.DATABASE)
               .getCollection(App.COLLECTION).insertOne(document);
-            System.out.println("Appended to mongo database");
 
         } finally {
             ds.getMongo().close();
