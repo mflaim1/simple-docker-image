@@ -19,8 +19,7 @@ pipeline{
 
     stage ('Deploy to INT') {
       steps{
-	sh "docker-compose -p app-$BUILD_NUMBER --file src/test/resources/docker-compose.yml up -d mongo
-"
+	sh "docker-compose -p app-$BUILD_NUMBER --file src/test/resources/docker-compose.yml up -d mongo"
 	sh "sleep 30"
 
 	sh "docker-compose -p app-$BUILD_NUMBER --file src/test/resources/docker-compose.yml \
