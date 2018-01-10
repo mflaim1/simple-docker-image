@@ -37,7 +37,7 @@ public class App {
         
         System.out.println("mongoHost: "+mongoHost);
 
-        MongoClient mongo = new MongoClient(mongoHost);
+        MongoClient mongo = new MongoClient("mongo",27017);
         Morphia morphia = new Morphia();
         Datastore ds = morphia.createDatastore(mongo, App.DATABASE);
         try {
@@ -52,6 +52,12 @@ public class App {
            ds.getMongo()
               .getDatabase(App.DATABASE)
               .getCollection(App.COLLECTION).insertOne(document);
+           
+           MongoCursor<Document> result = ds.getMongo()
+                   .getDatabase(App.DATABASE)
+                   .getCollection(App.COLLECTION).find().limit(3).iterator();
+           
+           System.out.println("REUSLT HAS NEXT: "+ result.hasNext());
 
         } finally {
             ds.getMongo().close();
