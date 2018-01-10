@@ -31,7 +31,7 @@ public class AppIT {
     
     @Test
     public void testSave() throws Exception {
-        MongoClient mongo = new MongoClient("localhost", DOCKER_MONGO_PORT);
+        MongoClient mongo = new MongoClient(DOCKER_MONGO_HOST , DOCKER_MONGO_PORT);
         Morphia morphia = new Morphia();
         Datastore ds = morphia.createDatastore(mongo, App.DATABASE);
         try {

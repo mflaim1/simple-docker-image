@@ -34,6 +34,8 @@ public class App {
         }
 
         String mongoHost = args[0];
+        
+        System.out.println("mongoHost: "+mongoHost);
 
         MongoClient mongo = new MongoClient(mongoHost);
         Morphia morphia = new Morphia();
