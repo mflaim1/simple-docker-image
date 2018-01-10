@@ -38,7 +38,7 @@ public class AppIT {
             
             MongoCursor<Document> result = ds.getMongo()
                                          .getDatabase(App.DATABASE)
-                                         .getCollection(App.COLLECTION).find().limit(3).iterator();
+                                         .getCollection(App.COLLECTION).find().limit(2).iterator();
             assertTrue(result.hasNext());
             assertEquals("Hello World", result.next().get("text"));
             assertFalse(result.hasNext());

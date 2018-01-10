@@ -28,15 +28,13 @@ public class App {
      *
      */
     public static void main(String[] args) throws Exception {
-       if (args == null || args.length == 0) {
+      /* if (args == null || args.length == 0) {
             System.err.println("MongoDB server not informed.");
             System.exit(1);
         }
 
-        String mongoHost = args[0];
+        String mongoHost = args[0];*/
         
-        System.out.println("mongoHost: "+mongoHost);
-
         MongoClient mongo = new MongoClient("mongo",27017);
         Morphia morphia = new Morphia();
         Datastore ds = morphia.createDatastore(mongo, App.DATABASE);
@@ -53,11 +51,6 @@ public class App {
               .getDatabase(App.DATABASE)
               .getCollection(App.COLLECTION).insertOne(document);
            
-           MongoCursor<Document> result = ds.getMongo()
-                   .getDatabase(App.DATABASE)
-                   .getCollection(App.COLLECTION).find().limit(3).iterator();
-           
-           System.out.println("REUSLT HAS NEXT: "+ result.hasNext());
 
         } finally {
             ds.getMongo().close();
