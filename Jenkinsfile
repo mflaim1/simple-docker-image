@@ -43,8 +43,7 @@ pipeline{
       }
     post {
         always {
-            sh "docker-compose -p app-$BUILD_NUMBER --file src/test/resources/docker-compose.yml down
-"
+            sh "docker-compose -p app-$BUILD_NUMBER --file src/test/resources/docker-compose.yml down"
         }
     }
   }
