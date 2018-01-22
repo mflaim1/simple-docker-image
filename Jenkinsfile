@@ -13,7 +13,7 @@ pipeline{
           '''
       }
     }
-    stage ('Build') {
+    stage ('Build Docker Images') {
       steps{
       
         sh "mvn clean install -U -Papp-docker-image"
@@ -23,8 +23,9 @@ pipeline{
 
     stage ('Deploy to INT') {
       steps{
-      
-		sh "docker-compose -p app-$BUILD_NUMBER --file src/test/resources/docker-compose.yml up -d mongo"
+		sh "docker pull oscarfonts/h2"    
+
+		sh "docker run -d -p 1521:1521 -p 81:81 -v /tmp:/opt/h2-data --name=MyH2Instance oscarfonts/h2"
 		sh "sleep 30"
 	
 		sh "docker-compose -p app-$BUILD_NUMBER --file src/test/resources/docker-compose.yml \
