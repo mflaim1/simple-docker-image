@@ -4,8 +4,13 @@ pipeline{
    tools {
     maven 'mvn'
   }
+  stages{
 
+  script{
   myPipeline()
+  }
+  }
+
 
    post {
    	  always {
